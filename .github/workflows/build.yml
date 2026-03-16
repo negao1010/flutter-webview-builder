@@ -14,8 +14,17 @@ jobs:
           channel: 'stable'
           cache: true
 
-      - name: Install dependencies
-        run: flutter pub get
+      - name: Salvar código personalizado
+        run: cp lib/main.dart /tmp/custom_main.dart
+
+      - name: Criar estrutura do projeto Flutter
+        run: flutter create --project-name flutter_app .
+
+      - name: Restaurar main.dart personalizado
+        run: cp /tmp/custom_main.dart lib/main.dart
+
+      - name: Adicionar dependência webview
+        run: flutter pub add webview_flutter
 
       - name: Build APK
         run: flutter build apk --release
